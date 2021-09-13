@@ -5,7 +5,7 @@ import { useHistory } from "react-router";
 import { Verify } from "../routes/paths";
 import { useDispatch } from "react-redux"
 
-export default function SigninPage() {
+export default function SignUpPage() {
   const history = useHistory()
   const dispatch = useDispatch()
 
@@ -20,7 +20,6 @@ export default function SigninPage() {
   const [handleSubmit, { loading, data }] = useMutation(CREATE_USER, {
     onError: (err) => {
       setSubmitErr(err);
-      console.log(err);
     },
   });
   const formOnChange = (e) => {
@@ -32,8 +31,9 @@ export default function SigninPage() {
     }
   };
   if (data) {
-    dispatch({ type: "USER_CREATED", payload: data })
+    dispatch({ type: "USER_CREATED", payload: data.createNewUser })
     history.push(Verify)
+    
   }
 
   return (

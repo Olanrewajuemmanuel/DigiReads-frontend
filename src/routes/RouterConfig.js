@@ -5,7 +5,7 @@ import NavBar from "../components/NavBar";
 import BooksPage from "../pages/BooksPage";
 import AuthorsPage from "../pages/AuthorsPage";
 import ForumsPage from "../pages/ForumsPage";
-import SigninPage from "../pages/SigninPage";
+import SignUpPage from "../pages/SignUpPage";
 import LoginPage from "../pages/LoginPage";
 import AuthorDetails from "../pages/AuthorDetails";
 import BookDetails from "../pages/BookDetails";
@@ -24,7 +24,7 @@ function RouterConfig() {
         <Route path={Authors} component={AuthorsPage} />
         <Route path={Author + "/:name/:author_id"} component={AuthorDetails} />
         <Route path={Forum} component={ForumsPage} />
-        <Route path={SignIn} component={SigninPage} />
+        <Route path={SignIn} component={SignUpPage} />
         <Route path={Login} component={LoginPage} />
         <Route path={Verify} component={VerifyEmail} />
       </Router>
