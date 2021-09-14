@@ -22,6 +22,12 @@ export default function SignUpPage() {
     onError: (err) => {
       setSubmitErr(err);
     },
+    onCompleted: (data) => {
+      dispatch({ type: "USER_CREATED", payload: data.createNewUser });
+      setCookie("user", Date.now() + data.createNewUser.id, {
+        path: "/",
+      });
+    },
   });
   const formOnChange = (e) => {
     if (e.target.tagName != "checkbox") {
@@ -48,12 +54,6 @@ export default function SignUpPage() {
                   createNewUserInput: formData,
                 },
               });
-              if (data) {
-                dispatch({ type: "USER_CREATED", payload: data.createNewUser });
-                setCookie("user", Date.now() + data.createNewUser.id, {
-                  path: "/",
-                });
-              }
             }}
           >
             <div className="form-group">
@@ -88,7 +88,7 @@ export default function SignUpPage() {
               <label htmlFor="password">Password:</label>
               <input type="password" name="password" onChange={formOnChange} />
             </div>
-            <button disabled={loading}>
+            <button disabled={loading} type="submit">
               {loading ? "Submitting..." : "Submit"}
             </button>
           </form>

@@ -13,7 +13,7 @@ export default function AuthorsPage() {
       order: "ASC",
     },
   });
-  if (loading) return loading;
+  if (loading) return "loading...";
   return (
     <div>
       {err.message ? (

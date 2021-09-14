@@ -25,6 +25,10 @@ export default function LoginPage() {
     onError: (err) => {
       setErr(err);
     },
+    onCompleted: (data) => {
+      setCookie("user", Date.now() + data.login.id, { path: "/" });
+      dispatch({ type: USER_LOGIN, payload: data.login });
+    }
   });
 
   return (
@@ -43,10 +47,7 @@ export default function LoginPage() {
                   loginPassword: formData.password,
                 },
               });
-              if (data) {
-                setCookie("user", Date.now() + data.login.id, { path: "/" });
-                dispatch({ type: USER_LOGIN, payload: data.login });
-              }
+
             }}
           >
             <div className="form-group">
@@ -61,7 +62,7 @@ export default function LoginPage() {
                 onChange={handleFormChange}
               />
             </div>
-            <button button={loading}>Submit</button>
+            <button type="submit" disabled={loading}>Submit</button>
           </form>
           <p style={{ color: "dodgerblue" }}>Forgot password?</p>
         </div>

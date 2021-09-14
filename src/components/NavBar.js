@@ -17,7 +17,6 @@ export default function NavBar() {
   const history = useHistory()
   const logOut = () => {
     removeCookie("user", { path: "/" })
-    console.log(cookies);
     dispatch({ type: USER_SIGN_OUT })
     history.push(Login)
   }
@@ -39,9 +38,9 @@ export default function NavBar() {
       {cookies.user ? (
         <div>
             <img src="" alt="profile-pic" />
-            <p style={{ color: "dodgerblue", textDecoration: "underline", cursor: "pointer" }} onClick={logOut}>
+            <a style={{ color: "dodgerblue", textDecoration: "underline", cursor: "pointer" }} onClick={logOut}>
             Logout
-            </p>
+            </a>
         </div>
       ) : (
         <div className="auth">
