@@ -1,4 +1,4 @@
-import { USER_CREATED, USER_LOGIN } from "../types";
+import { USER_CREATED, USER_LOGIN, USER_SIGN_OUT } from "../types";
 
 const initialState = {
     userData: [],
@@ -15,6 +15,11 @@ export default function userReducer(state=initialState, action) {
             return {
                 ...state,
                 userData: action.payload
+            }
+        case USER_SIGN_OUT:
+            return {
+                ...state,
+                userData: []
             }
         default:
             return state;
