@@ -12,11 +12,12 @@ import { useDispatch } from "react-redux";
 import { USER_SIGN_OUT } from "../redux/types";
 
 export default function NavBar() {
-  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["user", "authorVerifiedStatus"]);
   const dispatch = useDispatch()
   const history = useHistory()
   const logOut = () => {
-    removeCookie("user", { path: "/" })
+    removeCookie("user")
+    removeCookie("authorVerifiedStatus")
     dispatch({ type: USER_SIGN_OUT })
     history.push(Login)
   }
