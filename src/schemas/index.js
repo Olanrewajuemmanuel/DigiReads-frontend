@@ -47,6 +47,8 @@ export const CREATE_USER = gql`
         createNewUser(input: $createNewUserInput) {
             id
             token
+            firstName
+            lastName
             email
             user_category
         }
@@ -58,7 +60,23 @@ export const LOGIN = gql`
             id
             token
             email
+            firstName
+            lastName
             user_category
         }
     }
   `;
+export const REGISTER_AUTHOR = gql`
+    mutation Mutation($authorInput: AuthorInput!, $userId: String!) {
+      createNewAuthor(input: $authorInput, userId: $userId) {
+        id
+        name
+        status
+        books {
+          id
+        }
+        author_bio
+        verified
+      }
+    }
+`
