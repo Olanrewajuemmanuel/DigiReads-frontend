@@ -27,6 +27,7 @@ export default function SignUpPage() {
       setCookie("user", Date.now() + data.createNewUser.id, {
         path: "/",
       });
+      
     },
   });
   const formOnChange = (e) => {

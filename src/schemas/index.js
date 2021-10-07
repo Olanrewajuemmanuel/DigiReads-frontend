@@ -20,6 +20,17 @@ export const GET_AUTHOR = gql`
     }
   }
 `;
+export const GET_USER = gql`
+  query GET_USER($id: String!) {
+    getUser(id: $id) {
+      firstName
+      lastName
+      email
+      email_verified
+      user_category
+    }
+  }
+`
 
 export const GET_AUTHORS = gql`
   query GET_AUTHORS($limit: Int, $order: Order!) {

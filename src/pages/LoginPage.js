@@ -24,10 +24,14 @@ export default function LoginPage() {
   const [handleSubmit, { loading, data }] = useMutation(LOGIN, {
     onError: (err) => {
       setErr(err);
+      console.log(err);
     },
     onCompleted: (data) => {
-      setCookie("user", Date.now() + data.login.id, { path: "/" });
-      dispatch({ type: USER_LOGIN, payload: data.login });
+      if (data) {
+        setCookie("user", Date.now() + data.login.id, { path: "/" });
+        dispatch({ type: USER_LOGIN, payload: data.login }); // send data to store
+      }
+        
     }
   });
 

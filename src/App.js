@@ -15,7 +15,7 @@ import { API_URL } from "./constants";
 import RouterConfig from "./routes/RouterConfig";
 
 const httpLink = new HttpLink({
-  uri: "http://localhost:4000/graphql",
+  uri: API_URL,
 });
 
 const authMiddleWare = new ApolloLink((operation, forward) => {

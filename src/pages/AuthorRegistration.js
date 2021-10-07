@@ -1,8 +1,9 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
+import { AUTHOR_VERIFIED } from "../redux/types";
 import { HomePage, Login } from "../routes/paths";
 import { GET_AUTHOR, REGISTER_AUTHOR } from "../schemas";
 
@@ -14,6 +15,7 @@ function AuthorRegistration() {
   });
   const [err, setErr] = useState({});
   const userData = useSelector((state) => state.userReducer.userData);
+  const dispatch = useDispatch()
 
   const handleChange = (e) => {
     setFormData({
@@ -28,7 +30,7 @@ function AuthorRegistration() {
     onCompleted: (data) => {
       if (data) {
         // dispatch to store
-
+        dispatch({ type: AUTHOR_VERIFIED, payload: data.createNewAuthor })
         // cookie (maybe)
         setCookie("authorVerifiedStatus", data.createNewAuthor.verified, {
           path: "/",
