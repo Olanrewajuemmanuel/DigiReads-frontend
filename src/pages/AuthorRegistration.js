@@ -8,9 +8,9 @@ import { HomePage, Login } from "../routes/paths";
 import { GET_AUTHOR, REGISTER_AUTHOR } from "../schemas";
 
 function AuthorRegistration() {
-  const [cookies, setCookie] = useCookies(["authorVerifiedStatus"]);
+  const [cookies, setCookie] = useCookies(["authorVerifiedStatus", "user"]);
   const [formData, setFormData] = useState({
-    authorName: "",
+    authorName: localStorage.getItem("name"),
     authorBio: "",
   });
   const [err, setErr] = useState({});
@@ -40,10 +40,11 @@ function AuthorRegistration() {
   });
   return (
     <div className="container">
+      {/* 1. display page if there is a user in session, else redirect to login */}
       {cookies.user ? (
         <div>
           {err ? err.message : ""}
-          {/**If data is saved, hide form */}
+          {/* 2. If data is saved, hide form and show next */}
           {cookies.authorVerifiedStatus ? (
             <div className="next" aria-hidden={!data}>
               <a>Next step: Fill books you have written</a>
@@ -60,7 +61,7 @@ function AuthorRegistration() {
                       author_bio: formData.authorBio,
                       status: "NEW",
                     },
-                    userId: userData.id || localStorage.getItem("authorId"),
+                    userId: localStorage.getItem("userId"),
                   },
                 });
               }}
@@ -70,7 +71,7 @@ function AuthorRegistration() {
                   Your preferred author name (defaults to first name and last
                   name):
                 </label>
-                <input type="name" name="authorName" onChange={handleChange} />
+                <input type="name" name="authorName" onChange={handleChange} placeholder={formData.authorName} />
               </div>
               <div className="form-group">
                 <label htmlFor="authorBio">

@@ -5,6 +5,7 @@ function* saveUserInfo({ payload }) {
   // save token, user id
   localStorage.setItem("token", payload.token)
   localStorage.setItem("userId", payload.id)
+  localStorage.setItem("name", payload.firstName + " " + payload.lastName)
   yield put({ type: DATA_SAVED, payload })
 }
 
@@ -12,6 +13,8 @@ function* clearUserBrowser() {
   localStorage.removeItem("userId")
   localStorage.removeItem("authorId")
   localStorage.removeItem("token")
+  localStorage.removeItem("name")
+
 }
 
 function* watcherSaga() {

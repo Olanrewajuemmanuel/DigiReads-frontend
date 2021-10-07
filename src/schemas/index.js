@@ -20,9 +20,17 @@ export const GET_AUTHOR = gql`
     }
   }
 `;
+export const GET_AUTHOR_FROM_USER = gql`
+  query GET_AUTHOR_FROM_USER($id: String!) {
+    getAuthorWithUserId(id: $id) {
+      verified
+  }
+}
+`;
 export const GET_USER = gql`
   query GET_USER($id: String!) {
     getUser(id: $id) {
+      id
       firstName
       lastName
       email
@@ -30,7 +38,7 @@ export const GET_USER = gql`
       user_category
     }
   }
-`
+`;
 
 export const GET_AUTHORS = gql`
   query GET_AUTHORS($limit: Int, $order: Order!) {
@@ -54,40 +62,40 @@ export const GET_BOOK = gql`
 `;
 
 export const CREATE_USER = gql`
-    mutation Mutation($createNewUserInput: UserInput!) {
-        createNewUser(input: $createNewUserInput) {
-            id
-            token
-            firstName
-            lastName
-            email
-            user_category
-        }
+  mutation Mutation($createNewUserInput: UserInput!) {
+    createNewUser(input: $createNewUserInput) {
+      id
+      token
+      firstName
+      lastName
+      email
+      user_category
     }
-  `;
+  }
+`;
 export const LOGIN = gql`
-    mutation Mutation($loginEmail: String!, $loginPassword: String!) {
-        login(email: $loginEmail, password: $loginPassword) {
-            id
-            token
-            email
-            firstName
-            lastName
-            user_category
-        }
+  mutation Mutation($loginEmail: String!, $loginPassword: String!) {
+    login(email: $loginEmail, password: $loginPassword) {
+      id
+      token
+      email
+      firstName
+      lastName
+      user_category
     }
-  `;
+  }
+`;
 export const REGISTER_AUTHOR = gql`
-    mutation Mutation($authorInput: AuthorInput!, $userId: String!) {
-      createNewAuthor(input: $authorInput, userId: $userId) {
+  mutation Mutation($authorInput: AuthorInput!, $userId: String!) {
+    createNewAuthor(input: $authorInput, userId: $userId) {
+      id
+      name
+      status
+      books {
         id
-        name
-        status
-        books {
-          id
-        }
-        author_bio
-        verified
       }
+      author_bio
+      verified
     }
-`
+  }
+`;

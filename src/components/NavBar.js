@@ -17,6 +17,7 @@ export default function NavBar() {
   const history = useHistory()
   const logOut = () => {
     removeCookie("user")
+    removeCookie("authorVerifiedStatus")
     dispatch({ type: USER_SIGN_OUT })
     history.push(Login)
   }
